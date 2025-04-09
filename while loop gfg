@@ -1,0 +1,16 @@
+import java.util.*;
+
+class Solution {
+    public void calculateMultiples(int n) {
+        
+        int code = 10;
+        
+        while(code > 0){
+            
+            System.out.print(code*n+" ");
+            
+            code--;
+            
+        }
+    }
+}
