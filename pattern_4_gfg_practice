@@ -1,0 +1,21 @@
+
+class Solution {
+
+    void printTriangle(int n) {
+        
+        int s = 1 ;
+        
+        for (int i =1 ; i <= n ; i ++){
+            
+            for( int j = 1; j <= s ; j ++){
+                
+                System.out.print(i + " ");
+            }
+            
+            s ++;
+            
+            System.out.println();
+        }
+
+    }
+}
