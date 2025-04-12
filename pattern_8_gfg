@@ -1,0 +1,25 @@
+class Solution {
+
+    void printTriangle(int n) {
+        
+        
+        // code here
+        
+        for(int i =0 ; i < n ; i ++){
+            
+            int star = (2 *( n - i))-1;
+            
+            int space = i ;
+            
+            for (int j = 0 ; j < space ; j ++ ){
+                System.out.print(" ");
+            }
+            
+            for (int k = 0 ; k < star ; k ++ ){
+                System.out.print("*");
+            }
+            
+            System.out.println();
+        }
+    }
+}
