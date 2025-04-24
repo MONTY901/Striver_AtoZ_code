@@ -1,0 +1,27 @@
+class Solution {
+    public int missingNumber(int[] nums) {
+
+        int n = nums.length;
+
+        int sum =0;
+
+
+        for(int num:nums){
+
+            sum = sum+num;
+
+
+        }
+
+        int sum1 = n*(n+1)/2;
+
+        int missing_number= sum1-sum;
+
+        return missing_number;
+
+
+
+
+
+    }
+}
