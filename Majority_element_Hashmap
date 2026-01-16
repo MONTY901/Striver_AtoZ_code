@@ -1,0 +1,29 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+
+        // Step 1: Create HashMap to store frequency
+        Map<Integer, Integer> map = new HashMap<>();
+        List<Integer> majorityElements = new ArrayList<>();
+
+        // Step 2: Count occurrences
+        for (int val : nums) {
+            map.put(val, map.getOrDefault(val, 0) + 1);
+        }
+
+        // Step 3: Define threshold
+        int threshold = nums.length / 3;
+
+        // Step 4: Check which elements exceed threshold
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int element = entry.getKey();
+            int count = entry.getValue();
+
+            if (count > threshold) {
+                majorityElements.add(element);
+            }
+        }
+
+        // Step 5: Return result
+        return majorityElements;
+    }
+}
