@@ -1,0 +1,34 @@
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int maxVal = 0;
+
+        // Find maximum element
+        for (int num : nums) {
+            maxVal = Math.max(maxVal, num);
+        }
+
+        int left = 1;
+        int right = maxVal;
+        int result = maxVal;
+
+        // Binary search
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            long sum = 0;
+            for (int num : nums) {
+                // Efficient ceiling division
+                sum += (num + mid - 1) / mid;
+            }
+
+            if (sum <= threshold) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return result;
+    }
+}
