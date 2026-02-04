@@ -1,0 +1,46 @@
+public class Solution {
+    public String longestPalindrome(String s) {
+        if (s.length() <= 1) return s;
+
+        // Transform string: "abba" -> "#a#b#b#a#"
+        s = "#" + s.replaceAll("", "#") + "#";
+
+        int n = s.length();
+        int[] p = new int[n];
+
+        int l = 0, r = 0;
+        int maxLen = 0;
+        int center = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            int mirror = l + r - i;
+
+            // ⭐ EXACT formula from the board
+            p[i] = Math.max(0, Math.min(r - i, (mirror >= 0 ? p[mirror] : 0)));
+
+            // Expand
+            while (i - p[i] - 1 >= 0 &&
+                   i + p[i] + 1 < n &&
+                   s.charAt(i - p[i] - 1) == s.charAt(i + p[i] + 1)) {
+                p[i]++;
+            }
+
+            // Update boundaries
+            if (i + p[i] > r) {
+                l = i - p[i];
+                r = i + p[i];
+            }
+
+            // Track maximum
+            if (p[i] > maxLen) {
+                maxLen = p[i];
+                center = i;
+            }
+        }
+
+        // Extract answer
+        String res = s.substring(center - maxLen, center + maxLen + 1);
+        return res.replaceAll("#", "");
+    }
+}
