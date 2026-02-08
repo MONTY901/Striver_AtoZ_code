@@ -1,0 +1,11 @@
+class Solution {
+    public static Node deleteHead(Node head) {
+        Node temp = head;
+
+        head = head.next;
+        head.prev = null;
+        temp.next = null;
+
+        return head;
+    }
+}
