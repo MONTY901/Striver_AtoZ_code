@@ -1,0 +1,23 @@
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        // Initialize prev to null (this will be the new tail after reversal)
+        ListNode prev = null;
+
+        // Traverse through the list
+        while (head != null) {
+            // Temporarily store the next node
+            ListNode nextNode = head.next;
+
+            // Reverse the current node's pointer
+            head.next = prev;
+
+            // Move prev and head forward
+            prev = head;
+            head = nextNode;
+        }
+
+        // prev is the new head of the reversed list
+        return prev;
+    }
+}
