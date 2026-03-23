@@ -1,0 +1,40 @@
+class MinStack {
+    // Variable to store the current minimum value, initialized to maximum possible integer value
+    int min = Integer.MAX_VALUE;
+    
+    // Stack to store the values and the previous minimum values
+    Stack<Integer> stack = new Stack<>();
+
+    // Push a new value onto the stack
+    public void push(int x) {
+        // If the new value is less than or equal to the current minimum
+        if (x <= min) {
+            // Push the current minimum onto the stack before updating it
+            stack.push(min);
+            // Update the minimum to the new value
+            min = x;
+        }
+        
+        // Push the actual value onto the stack
+        stack.push(x);
+    }
+
+    // Remove the element from the top of the stack
+    public void pop() {
+        // If the value being popped is the current minimum, the next element in the stack is the previous minimum
+        if (stack.pop() == min) {
+            // Pop the previous minimum and set it as the new minimum
+            min = stack.pop();
+        }
+    }
+
+    // Return the top element from the stack
+    public int top() {
+        return stack.peek(); // Return the top value of the stack without modifying the stack
+    }
+
+    // Retrieve the minimum value in the stack
+    public int getMin() {
+        return min; // Return the current minimum
+    }
+}
