@@ -1,0 +1,71 @@
+import java.util.*;
+
+class Solution {
+
+    // Find Next Smaller Element index (right boundary)
+    private int[] nextSmaller(int[] arr) {
+        int n = arr.length;
+        int[] nse = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        // Traverse from right → left
+        for (int i = n - 1; i >= 0; i--) {
+
+            // Remove elements >= current (they can't be minimum)
+            while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+                st.pop();
+            }
+
+            // If no smaller element → boundary is n
+            nse[i] = st.isEmpty() ? n : st.peek();
+
+            st.push(i);
+        }
+        return nse;
+    }
+
+    // Find Previous Smaller or Equal index (left boundary)
+    private int[] prevSmallerEqual(int[] arr) {
+        int n = arr.length;
+        int[] psee = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        // Traverse from left → right
+        for (int i = 0; i < n; i++) {
+
+            // Remove elements > current
+            while (!st.isEmpty() && arr[st.peek()] > arr[i]) {
+                st.pop();
+            }
+
+            // If no smaller → boundary is -1
+            psee[i] = st.isEmpty() ? -1 : st.peek();
+
+            st.push(i);
+        }
+        return psee;
+    }
+
+    public int sumSubarrayMins(int[] arr) {
+        int n = arr.length;
+        int mod = (int)1e9 + 7;
+
+        int[] nse = nextSmaller(arr);
+        int[] psee = prevSmallerEqual(arr);
+
+        long result = 0;
+
+        // Calculate contribution of each element
+        for (int i = 0; i < n; i++) {
+
+            int left = i - psee[i];   // choices on left
+            int right = nse[i] - i;   // choices on right
+
+            long subarrays = (long) left * right;
+
+            result = (result + subarrays * arr[i]) % mod;
+        }
+
+        return (int) result;
+    }
+}
