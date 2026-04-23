@@ -1,0 +1,19 @@
+import java.util.*;
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        traversal(root, result);
+        return result;
+    }
+
+    private void traversal(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        
+        result.add(root.val);        // Root
+        traversal(root.left, result); // Left
+        traversal(root.right, result); // Right
+    }
+}
