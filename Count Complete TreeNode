@@ -1,0 +1,20 @@
+class Solution {
+
+    public int countNodes(TreeNode root) {
+        return count(root);
+    }
+
+    public int count(TreeNode root) {
+
+        // Base case
+        if (root == null) {
+            return 0;
+        }
+
+        // Count current node + left subtree + right subtree
+        int left = count(root.left);
+        int right = count(root.right);
+
+        return 1 + left + right;
+    }
+}
